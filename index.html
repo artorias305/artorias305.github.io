@@ -1,7 +1,106 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Portfolio</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="lightbox.min.css">
+</head>
+
 <body>
-<h1>Hello World</h1>
-<p>I'm hosted with GitHub Pages.</p>
+  <header>
+    <nav>
+      <h1>My Portfolio</h1>
+      <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#portfolio">Portfolio</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section id="hero">
+    <div class="hero-content">
+      <h2>Welcome to my portfolio</h2>
+      <p>I make osu! thumbnails</p>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="container">
+      <h2>About Me</h2>
+      <p>Hi, i am Artorias and i'm currently 16 years old, can make osu! thumbnails for you if you want, just contact me through twitter, discord or osu! and we can talk.</p>
+    </div>
+  </section>
+
+  <section id="portfolio">
+    <div class="container">
+      <h2>Portfolio</h2>
+      <div class="gallery">
+        <a href="thumbnails/bokura dake lifeline.png" data-lightbox="gallery" data-title="Image 1">
+          <div class="item">
+            <img src="thumbnails/bokura dake lifeline.png" alt="Image 1">
+          </div>
+        </a>
+        <a href="thumbnails/collage.jpg" data-lightbox="gallery" data-title="Image 2">
+          <div class="item">
+            <img src="thumbnails/collage.jpg" alt="Image 2">
+          </div>
+        </a>
+        <a href="thumbnails/first storm.jpg" data-lightbox="gallery" data-title="Image 3">
+            <div class="item">
+              <img src="thumbnails/first storm.jpg" alt="Image 3">
+            </div>
+          </a>
+          <a href="thumbnails/ghost rule.jpg" data-lightbox="gallery" data-title="Image 4">
+            <div class="item">
+              <img src="thumbnails/ghost rule.jpg" alt="Image 4">
+            </div>
+          </a>
+          <a href="thumbnails/guitar.jpg" data-lightbox="gallery" data-title="Image 5">
+            <div class="item">
+              <img src="thumbnails/guitar.jpg" alt="Image 5">
+            </div>
+          </a>
+          <a href="thumbnails/sawakaze.jpg" data-lightbox="gallery" data-title="Image 6">
+            <div class="item">
+              <img src="thumbnails/sawakaze.jpg" alt="Image 6">
+            </div>
+          </a>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="container">
+      <h2>Contact Me</h2>
+      <section id="contact">
+        <div class="container">
+          <h2>Contact Me</h2>
+          <ul class="contact-list">
+            <li><strong>Discord Username:</strong> artoriasss</li>
+            <li><strong>osu!:</strong> <a href="https://osu.ppy.sh/users/19150343" target="_blank" rel="noopener noreferrer">[ Artorias ]</a></li>
+            <li><strong>Twitter:</strong> <a href="https://twitter.com/ilygxsh" target="_blank" rel="noopener noreferrer">@ilygxsh</a></li>
+          </ul>
+        </div>
+      </section>      
+    </div>
+  </section>
+
+  <script src="jquery.min.js"></script>
+  <script src="lightbox.min.js"></script>
+  <script>
+    $(document).ready(function () {
+        $('.gallery a').lightbox();
+    });
+  </script>
+
+  <footer>
+    <p>&copy; 2023 Artorias's Portfolio. All rights reserved.</p>
+  </footer>
+
 </body>
+
 </html>
