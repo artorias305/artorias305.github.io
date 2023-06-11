@@ -44,13 +44,16 @@ nav ul li {
 
 nav ul li a {
   color: #777777;
-  text-decoration: none;
+  background-color: transparent;
+  border: none;
   font-weight: bold;
+  cursor: pointer;
   padding: 10px;
 }
 
 nav ul li a:hover {
-  background-color: #555;
+  text-shadow: 0 0 5px rgba(255, 255, 255, 0.8);
+  color: white;
 }
   
 /* Hero section styles */
@@ -116,7 +119,7 @@ cursor: pointer;
   
 /* Footer styles */
 footer {
-background-color: #333;
+background-color: #000000;
 color: #fff;
 text-align: center;
 padding: 10px;
@@ -166,4 +169,8 @@ grid-gap: 20px;
 .social-icons a {
   display: inline-block;
   margin: 5px;
+}
+
+.informative-text {
+  text-align: center;
 }
