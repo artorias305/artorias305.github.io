@@ -41,6 +41,25 @@
     </div>
   </section>  
 
+  <script src="jquery.min.js"></script>
+  <script src="lightbox.min.js"></script>
+  <script>
+    $(document).ready(function () {
+        $('.gallery a').lightbox();
+    });
+    
+    window.transitionToPage = function(href) {
+      document.querySelector('body').style.opacity = 0
+      setTimeout(function() {
+        window.location.href = href
+      }, 500);
+    }
+
+    document.addEventListener('DOMContentLoaded', function(event) {
+      document.querySelector('body').style.opacity = 1
+    })
+  </script>
+
 </body>
 
 </html>
