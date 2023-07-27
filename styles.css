@@ -1,4 +1,8 @@
 /* styles.css */
+@font-face {
+  font-family: 'Switzer';
+  src: url('fonts/Switzer-Regular.otf') format('opentype');
+}
 
 /* Reset some default styles */
 * {
@@ -9,10 +13,10 @@ box-sizing: border-box;
   
 /* Body styles */
 body {
-font-family: Arial, sans-serif;
+font-family: 'Switzer';
 line-height: 1.6;
-background-color: #333;
-color: #fff;
+background-color: rgba(23, 23, 23, 1);
+color: rgba(212, 212, 212, 1);
 opacity: 0;
 transition: opacity .5s;
 }
@@ -23,13 +27,13 @@ a {
   
 /* Header styles */
 header {
-background-color: #000000;
+background-color: rgba(23, 23, 23, 1);
 height: 50px;
 position: fixed;
 top: 0;
 width: 100%;
 z-index: 999;
-color: #9b9b9b;
+color: rgba(212, 212, 212, 1);
 padding: 10px;
 }
   
@@ -45,7 +49,7 @@ nav ul li {
 }
 
 nav ul li a {
-  color: #777777;
+  color: rgba(212, 212, 212, 1);
   background-color: transparent;
   border: none;
   font-weight: bold;
@@ -53,9 +57,28 @@ nav ul li a {
   padding: 10px;
 }
 
-nav ul li a:hover {
-  text-shadow: 0 0 5px rgba(255, 255, 255, 0.8);
-  color: white;
+nav ul li a.bright-underline {
+  color: rgba(212, 212, 212, 1);
+  text-decoration: none;
+  position: relative;
+}
+
+nav ul li a.bright-underline::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background-color: rgba(212, 212, 212, 1);
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+nav ul li a.bright-underline:hover::after {
+  opacity: 1;
+  box-shadow: 0 0 5px rgba(212, 212, 212, 1);
 }
   
 /* Hero section styles */
@@ -105,7 +128,7 @@ height: auto;
   
 /* Footer styles */
 footer {
-background-color: #000000;
+background-color: rgba(23, 23, 23, 1);
 color: #fff;
 text-align: center;
 padding: 10px;
