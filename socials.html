@@ -12,8 +12,8 @@
   <header>
     <nav>
         <ul>
-          <li><a class="bright-underline" href="index.html">Portfolio</a></li>
-          <li><a class="bright-underline" href="socials.html">Socials</a></li>
+          <li><a class="bright-underline transition-link" href="index.html">Portfolio</a></li>
+          <li><a class="bright-underline transition-link" href="socials.html">Socials</a></li>
         </ul>
       </nav>
   </header>
@@ -47,18 +47,8 @@
     $(document).ready(function () {
         $('.gallery a').lightbox();
     });
-    
-    window.transitionToPage = function(href) {
-      document.querySelector('body').style.opacity = 0
-      setTimeout(function() {
-        window.location.href = href
-      }, 500);
-    }
-
-    document.addEventListener('DOMContentLoaded', function(event) {
-      document.querySelector('body').style.opacity = 1
-    })
   </script>
+  <script src="transitions.js"></script>
 
 </body>
 
