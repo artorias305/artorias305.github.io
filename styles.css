@@ -134,38 +134,9 @@ text-align: center;
 padding: 10px;
 }
 
-  /* Gallery section styles */
-.gallery {
-display: grid;
-grid-template-columns: repeat(3, 1fr);
-grid-gap: 20px;
-}
-  
-@media screen and (max-width: 768px) {
-.gallery {
-    grid-template-columns: 1fr;
-}
-}
-
 .gallery-navigation {
   text-align: center;
   margin-top: 20px;
-}
-
-.prev-button,
-.next-button {
-  background-color: #f1f1f1;
-  border: none;
-  color: #333;
-  font-size: 24px;
-  padding: 10px 15px;
-  margin: 0 5px;
-  cursor: pointer;
-}
-
-.prev-button:hover,
-.next-button:hover {
-  background-color: #ddd;
 }
 
 .social-icons {
