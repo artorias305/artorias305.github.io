@@ -229,10 +229,3 @@ padding: 10px;
   opacity: 1;
   transform: translateY(0);
 }
-
-.divider {
-  width: 80%;
-  margin-left: 10%;
-  border-top: 1px solid rgba(78, 79, 80, 0.342);
-  border-radius: 5px;
-}
