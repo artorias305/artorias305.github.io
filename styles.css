@@ -9,23 +9,27 @@
   src: url(fonts/torus.woff2);
 }
 
+@font-face {
+  font-family: Linotte;
+  src: url('fonts/Linotte\ Regular.otf') format('opentype');
+}
 
 * {
-margin: 0;
-padding: 0;
-box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
   
 
 body {
-line-height: 1.6;
-font-family: Switzer;
-background-color: rgba(23, 23, 23, 1);
-color: rgba(212, 212, 212, 1);
-opacity: 0;
-transition: opacity .5s;
--ms-overflow-style: none;
-scrollbar-width: none;
+  line-height: 1.6;
+  font-family: Torus;
+  background-color: rgba(23, 23, 23, 1);
+  color: rgba(212, 212, 212, 1);
+  opacity: 0;
+  transition: opacity .5s;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 a {
@@ -34,14 +38,14 @@ a {
   
 
 header {
-background-color: rgba(23, 23, 23, 1);
-height: 50px;
-position: fixed;
-top: 0;
-width: 100%;
-z-index: 999;
-color: rgba(212, 212, 212, 1);
-padding: 10px;
+  background-color: rgba(23, 23, 23, 1);
+  height: 50px;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 999;
+  color: rgba(212, 212, 212, 1);
+  padding: 10px;
 }
   
 nav {
@@ -242,4 +246,21 @@ width: 100%;
 .fade-in.visible {
   opacity: 1;
   transform: translateY(0);
+}
+
+.icon {
+  display: inline-block;
+  margin: 10px;
+  transition: transform 0.2s ease-in-out, filter 0.2s ease-in-out;
+  transform-origin: center center;
+}
+
+.icon img {
+  max-width: 100%;
+  height: auto;
+}
+
+.icon:hover {
+  transform: scale(1.1) rotate(15deg);
+  filter: brightness(1.2);
 }
