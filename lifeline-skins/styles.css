@@ -1,0 +1,74 @@
+@font-face {
+  font-family: Inter;
+  src: url(fonts/Inter-Regular.ttf);
+}
+
+body {
+  font-family: Inter;
+  margin: 0;
+  padding: 0;
+  background-color: #171717;
+}
+
+header {
+  background-color: #171717;
+  color: white;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+header h1 {
+  margin: 0;
+  font-size: 28px;
+}
+
+main {
+  padding: 20px;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-gap: 20px;
+}
+
+.skin {
+  background-color: #171717;
+  border-radius: 8px;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  padding: 40px;
+  transition: box-shadow 0.3s ease;
+}
+
+.skin:hover {
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.skin h2 {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.skin img {
+  max-width: 90%;
+  height: auto;
+  margin-bottom: 10px;
+  border-radius: 8px;
+}
+
+.skin p {
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.skin a {
+  color: rgba(212, 212, 212, 1);
+  text-decoration: none;
+}
+
+.skin a:hover {
+  text-decoration: underline;
+  text-underline-offset: 5px;
+  text-decoration-color: rgba(212, 212, 212, 0.5);
+}
