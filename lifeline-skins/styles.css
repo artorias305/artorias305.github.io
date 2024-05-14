@@ -151,3 +151,34 @@ main {
 #searchBox:focus {
   outline: none;
 }
+
+#sortOrder {
+  background-color: #202020;
+  color: white;
+  border: 1px solid #555;
+  border-radius: 4px;
+  padding: 8px;
+  font-family: inherit;
+}
+
+#sortOrder option {
+  background-color: #202020;
+  color: white;
+}
+
+#sortOrder::before {
+  content: "\25BC";
+  position: absolute;
+  right: 10px;
+  top: calc(50% - 4px);
+  color: white;
+  pointer-events: none;
+}
+
+#sortOrder:hover {
+  background-color: #333;
+}
+
+#sortOrder:focus {
+  outline: none;
+}

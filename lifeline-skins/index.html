@@ -10,6 +10,14 @@
     <header>
       <h1>lifeline osu! skins</h1>
       <input type="text" id="searchBox" placeholder="Search..." />
+      <div>
+        <label for="sortOrder">Sort by:</label>
+        <select id="sortOrder">
+          <option value="none">None</option>
+          <option value="az">Name A-Z</option>
+          <option value="za">Name Z-A</option>
+        </select>
+      </div>
     </header>
     <main>
       <div class="grid-container">
@@ -51,22 +59,6 @@
         </section>
       </div>
     </main>
-    <script>
-      const searchBox = document.getElementById("searchBox");
-      const skins = document.querySelectorAll(".skin");
-
-      searchBox.addEventListener("input", function () {
-        const searchTerm = searchBox.value.toLowerCase();
-
-        skins.forEach(function (skin) {
-          const title = skin.querySelector("h2").textContent.toLowerCase();
-          if (title.includes(searchTerm)) {
-            skin.style.display = "block";
-          } else {
-            skin.style.display = "none";
-          }
-        });
-      });
-    </script>
+    <script src="sort.js"></script>
   </body>
 </html>
