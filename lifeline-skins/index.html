@@ -3,46 +3,47 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>osu! Skins Showcase</title>
+    <title>lifeline osu! skins</title>
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body class="body-background">
     <header>
       <h1>lifeline osu! skins</h1>
+      <input type="text" id="searchBox" placeholder="Search..." />
     </header>
     <main>
       <div class="grid-container">
-        <section class="skin">
+        <section class="skin" id="rafis">
           <a href="https://artoriasosu.s-ul.eu/cgGlKuB7">
             <h2>Rafis HDDT</h2>
             <img src="images/rafis.jpg" />
           </a>
         </section>
-        <section class="skin">
+        <section class="skin" id="zonelouise">
           <a href="https://artoriasosu.s-ul.eu/H859qeds">
             <h2>MonkoGlassTest zone ediot v3</h2>
             <img src="images/zone.jpg" />
           </a>
         </section>
-        <section class="skin">
+        <section class="skin" id="gn">
           <a href="https://artoriasosu.s-ul.eu/uEsvSJNw">
             <h2>+GN</h2>
             <img src="images/gn.jpg" />
           </a>
         </section>
-        <section class="skin">
+        <section class="skin" id="boop">
           <a href="https://artoriasosu.s-ul.eu/pBdCAFYb">
             <h2>boop</h2>
             <img src="images/boop.jpg" />
           </a>
         </section>
-        <section class="skin">
+        <section class="skin" id="aristia">
           <a href="https://artoriasosu.s-ul.eu/dk8BLcIu">
             <h2>vv_idke_trail</h2>
             <img src="images/aristiavv.jpg" />
           </a>
         </section>
-        <section class="skin">
+        <section class="skin" id="mathi">
           <a href="https://artoriasosu.s-ul.eu/y8PI6YkN">
             <h2>Mathi 2017</h2>
             <img src="images/mathi.jpg" />
@@ -50,5 +51,22 @@
         </section>
       </div>
     </main>
+    <script>
+      const searchBox = document.getElementById("searchBox");
+      const skins = document.querySelectorAll(".skin");
+
+      searchBox.addEventListener("input", function () {
+        const searchTerm = searchBox.value.toLowerCase();
+
+        skins.forEach(function (skin) {
+          const title = skin.querySelector("h2").textContent.toLowerCase();
+          if (title.includes(searchTerm)) {
+            skin.style.display = "block";
+          } else {
+            skin.style.display = "none";
+          }
+        });
+      });
+    </script>
   </body>
 </html>
