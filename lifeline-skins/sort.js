@@ -33,7 +33,6 @@ function filterSkins() {
       skin.style.display = "none";
     }
 
-    // Reorder the skins based on the sorted array
     skin.style.order = index;
   });
 }
