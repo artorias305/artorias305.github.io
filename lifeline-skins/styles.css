@@ -1,9 +1,4 @@
 @font-face {
-  font-family: Inter;
-  src: url(fonts/Inter-Regular.ttf);
-}
-
-@font-face {
   font-family: Torus;
   src: url(../fonts/TorusPro-Regular.ttf);
 }
@@ -15,6 +10,7 @@ body {
   background-color: #1e2029;
   color: #707489;
   font-weight: bold;
+  scroll-behavior: smooth;
 }
 
 header {
@@ -53,7 +49,6 @@ main {
   max-height: 600px;
   overflow: hidden;
   opacity: 0;
-  transform: translateY(20px);
 }
 
 @keyframes fadeInUp {
@@ -72,7 +67,7 @@ main {
 }
 
 .skin:hover {
-  transform: translateY(-10px);
+  transform: translateY(-5px);
   box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
 }
 
@@ -81,6 +76,11 @@ main {
   height: auto;
   margin-bottom: 10px;
   border-radius: 8px;
+  mask-image: radial-gradient(
+    circle,
+    rgba(0, 0, 0, 1) 70%,
+    rgba(0, 0, 0, 0) 100%
+  );
 }
 
 .skin p {
@@ -89,9 +89,14 @@ main {
 }
 
 .skin a {
-  color: #707489;
+  color: #94979e;
   text-decoration: none;
   position: relative;
+  transition: color 0.3s ease;
+}
+
+.skin a:hover {
+  color: #c9cbcf;
 }
 
 #searchBox {
