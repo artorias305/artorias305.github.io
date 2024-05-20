@@ -12,26 +12,14 @@ body {
   font-family: Torus;
   margin: 0;
   padding: 0;
-  background-color: #171717;
-  color: rgba(212, 212, 212, 1);
-}
-
-.body-background {
-  background-image: radial-gradient(
-      circle at center,
-      rgba(255, 255, 255, 0.005) 0,
-      rgba(255, 255, 255, 0.005) 1px,
-      transparent 1px
-    ),
-    linear-gradient(to right, rgba(255, 255, 255, 0.01) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.01) 1px, transparent 1px);
-  background-size: 20px 20px;
-  background-attachment: fixed;
+  background-color: #1e2029;
+  color: #707489;
+  font-weight: bold;
 }
 
 header {
-  background-color: #171717;
-  color: white;
+  background-color: #272935;
+  color: #707489;
   padding: 20px;
   text-align: center;
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
@@ -56,12 +44,11 @@ main {
 }
 
 .skin {
-  background-color: #202020;
+  background-color: #272935;
   border-radius: 8px;
-  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
   padding: 10px;
-  transition: box-shadow 0.3s ease, transform 0.3s ease, opacity 0.5s ease,
-    scale 0.3s ease;
+  transition: box-shadow 0.3s ease, transform 0.3s ease-out, opacity 0.5s ease;
   width: 400px;
   max-height: 600px;
   overflow: hidden;
@@ -85,19 +72,8 @@ main {
 }
 
 .skin:hover {
-  transform: translateY(-5px);
-  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.5);
-  scale: 1.01;
-}
-
-.skin h2 {
-  font-size: 20px;
-  margin-bottom: 10px;
-  transition: color 0.3s ease;
-}
-
-.skin:hover h2 {
-  color: white;
+  transform: translateY(-10px);
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
 }
 
 .skin img {
@@ -113,31 +89,15 @@ main {
 }
 
 .skin a {
-  color: rgba(212, 212, 212, 1);
+  color: #707489;
   text-decoration: none;
   position: relative;
 }
 
-.skin a::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: -2px;
-  width: 100%;
-  height: 2px;
-  background-color: rgba(212, 212, 212, 0.2);
-  transition: transform 0.3s ease;
-  transform-origin: center;
-  transform: scaleX(0);
-}
-
-.skin a:hover::after {
-  transform: scaleX(1);
-}
-
 #searchBox {
-  background-color: #202020;
+  background-color: #383b4c;
   border: none;
+  font-weight: bold;
   border-radius: 4px;
   color: white;
   padding: 10px;
@@ -148,40 +108,42 @@ main {
 }
 
 #searchBox::placeholder {
-  color: rgba(212, 212, 212, 0.5);
+  color: #65687b;
 }
 
 #searchBox:focus {
   outline: none;
+  border: 2px solid #636786;
+  background-color: #303241;
 }
 
 #sortOrder {
-  background-color: #202020;
-  color: white;
-  border: 1px solid #555;
+  background-color: #383b4c;
+  color: #707489;
+  border: none;
   border-radius: 4px;
   padding: 8px;
   font-family: inherit;
+  font-weight: bold;
 }
 
 #sortOrder option {
-  background-color: #202020;
+  background-color: #303241;
   color: white;
-}
-
-#sortOrder::before {
-  content: "\25BC";
-  position: absolute;
-  right: 10px;
-  top: calc(50% - 4px);
-  color: white;
-  pointer-events: none;
 }
 
 #sortOrder:hover {
-  background-color: #333;
+  background-color: #414458;
 }
 
 #sortOrder:focus {
   outline: none;
+  border: 2px solid #636786;
+}
+
+div a hr {
+  border: none;
+  height: 3px;
+  background-color: #303241;
+  transform: translateY(-10px);
 }
