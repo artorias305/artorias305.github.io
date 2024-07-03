@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>How to correctly reinstall and debloat your nvidia drivers</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <h1>How to debloat your nvidia drivers</h1>
+    <p>
+      Nvidia drivers are extremely bloated, we can reduce the amount of nvidia
+      processes by a lot by correctly reinstalling and debloating the nvidia
+      driver.
+    </p>
+    <p>
+      Make sure that you have
+      <a href="https://www.7-zip.org/download.html" target="_blank">7-zip</a> or
+      any other software that can extract files.
+    </p>
+    <h3>Uninstalling Drivers</h3>
+    <p>
+      To uninstall your current nvidia drivers we are gonna use a software
+      called <strong>Display Driver Uninstaller</strong>, it can be downloaded
+      <a
+        href="https://www.guru3d.com/download/display-driver-uninstaller-download/"
+        target="_blank"
+        >here</a
+      >.
+    </p>
+    <p>
+      Once you have downloaded and extracted it, open it up and in the advanced
+      options make sure to tick
+      <strong
+        >Prevent downloads of drivers from "Windows update" when "Windows"
+        search for a driver for a device</strong
+      >.
+    </p>
+    <p>
+      After that, select your GPU as device type and
+      <strong>Clean and do NOT restart</strong> (it is more recommended to
+      restart but im lazy you can do it if you want). This will completely
+      remove your display driver.
+    </p>
+    <h3>Debloating and installing drivers</h3>
+    <p>
+      Once that is done, go to the
+      <a href="https://www.nvidia.com/Download/Find.aspx" target="_blank"
+        >nvidia advanced driver search</a
+      >
+      and download the latest nvidia driver for your GPU.
+    </p>
+    <p>
+      Extract the <code>.exe</code> file you downloaded and delete all folders
+      <strong>except</strong> <code>NVI2</code> and <code>display.driver</code>
+    </p>
+    <p>
+      Open <code>setup.cfg</code> with any text editor and scroll all the way
+      down, delete the following lines:
+    </p>
+    <pre>
+        &lt;file name=&quot;${{EulaHtmlFile}}&quot;/&gt;
+        &lt;file name=&quot;${{FunctionalConsentFile}}&quot;/&gt;
+        &lt;file name=&quot;${{PrivacyPolicyFile}}&quot;/&gt;
+    </pre>
+    <p>After that you can save the file and run the driver setup as normal.</p>
+    <h3>Configuring Nvidia Control Panel</h3>
+    <p>These are the 3d settings i recommend:</p>
+    <pre>
+        Image Sharpening: Off
+        Ambient Occlusion: Off
+        Anisotropic filtering: Application-controlled
+        Antialiasing - FXAA: Off
+        Antialiasing - Gamma correction: Off
+        Antialiasing - Mode: Application-controlled
+        Antialiasing - Setting: None
+        Antialiasing - Transparency: Off
+        CUDA - GPUs: All
+        DSR - Factors: Off
+        DSR - Smoothness: Off
+        Low Latency Mode: On
+        Monitor Technology: Fixed Refresh
+        Multi-Frame Sampled AA (MFAA): Off
+        OpenGL rendering GPU: [your GPU]
+        Power management mode: Prefer maximum performance
+        Preferred refresh rate (monitor name): Highest available
+        Shader Cache: On
+        Texture filtering - Anisotropic sample optimization: On
+        Texture filtering - Negative LOD bias: Allow
+        Texture filtering - Quality: High performance
+        Texture filtering - Trilinear optimization: On
+        Threaded optimization: Auto
+        Triple buffering: Off
+        Vertical sync: Off
+        Virtual Reality pre-rendered frames: 1
+    </pre>
+    <p>
+      Make sure to set your GPU as processor in the
+      <strong>PhysX Settings</strong>
+    </p>
+  </body>
+</html>
