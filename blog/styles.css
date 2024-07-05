@@ -51,3 +51,31 @@ code,
 pre {
   font-family: Hack;
 }
+
+.post-title {
+  color: white;
+  font-size: 18px;
+}
+
+.group {
+  text-decoration: none;
+  color: #d4d4d4;
+}
+
+.post:hover .post-title {
+  text-decoration: underline;
+  text-decoration-color: #525252;
+  text-decoration-thickness: 0.1em;
+  text-underline-offset: 2px;
+}
+
+.home-link {
+  text-decoration: none;
+  color: #f5f5f5;
+  transition: color 0.3s ease;
+  text-decoration: white wavy underline;
+}
+
+.home-link:hover {
+  color: #d9d9d9;
+}
