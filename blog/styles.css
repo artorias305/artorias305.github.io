@@ -73,7 +73,9 @@ pre {
   text-decoration: none;
   color: #f5f5f5;
   transition: color 0.3s ease;
-  text-decoration: white wavy underline;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-decoration-color: #525252;
 }
 
 .home-link:hover {
