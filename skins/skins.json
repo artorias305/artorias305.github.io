@@ -62,5 +62,29 @@
     "category": "NM",
     "thumbnail": "assets/thumbnails/tuna.jpg",
     "download": "assets/skins/tuna.osk"
+  },
+  {
+    "id": 9,
+    "name": "Rafis Subahibi",
+    "author": "DDK RPK",
+    "category": "DT",
+    "thumbnail": "assets/thumbnails/subahibi.jpg",
+    "download": "assets/skins/subahibi.osk"
+  },
+  {
+    "id": 10,
+    "name": "boop",
+    "author": "ryuk",
+    "category": "DT",
+    "thumbnail": "assets/thumbnails/boop.jpg",
+    "download": "assets/skins/boop.osk"
+  },
+  {
+    "id": 11,
+    "name": "Rafis Zylice Edit",
+    "author": "DDK RPK",
+    "category": "DT",
+    "thumbnail": "assets/thumbnails/zylice-rafis.jpg",
+    "download": "assets/skins/zylice-rafis.osk"
   }
 ]
