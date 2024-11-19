@@ -118,19 +118,41 @@ input:focus {
 }
 
 .skin-card .btn {
+  position: relative;
   display: inline-block;
   margin-top: 10px;
   padding: 10px 20px;
+  padding-right: 40px;
   background-color: #fafafa;
   color: #09090b;
   border-radius: 10px;
   text-decoration: none;
   font-weight: bold;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease, transform 0.2s ease,
+    box-shadow 0.2s ease;
+  overflow: hidden;
 }
 
 .skin-card .btn:hover {
   background-color: #e2e2e2;
+  transform: translateX(5px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.skin-card .btn::after {
+  content: "➔"; /* Unicode arrow character */
+  position: absolute;
+  right: -30px; /* Start off the button, hidden */
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.2em;
+  color: #09090b;
+  transition: right 0.3s ease; /* Sliding effect */
+}
+
+/* Slide the arrow into view on hover */
+.skin-card .btn:hover::after {
+  right: 10px; /* Slide arrow inside the button */
 }
 
 h2,
