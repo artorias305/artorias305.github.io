@@ -1,0 +1,66 @@
+[
+  {
+    "id": 1,
+    "name": "Rafis 2018-03-26 HDDT",
+    "author": "Rafis",
+    "category": "DT",
+    "thumbnail": "assets/thumbnails/rafis.jpg",
+    "download": "assets/skins/rafis.osk"
+  },
+  {
+    "id": 2,
+    "name": "vv_idke_trail",
+    "author": "Aristia",
+    "category": "NM",
+    "thumbnail": "assets/thumbnails/vv_idke_trail.jpg",
+    "download": "assets/skins/vv_idke_trail.osk"
+  },
+  {
+    "id": 3,
+    "name": "Mathi Ensalada",
+    "author": "Mathi",
+    "category": "NM",
+    "thumbnail": "assets/thumbnails/mathi.jpg",
+    "download": "assets/skins/retro-wave.osk"
+  },
+  {
+    "id": 4,
+    "name": "Vaxei 2023",
+    "author": "Vaxei",
+    "category": "NM",
+    "thumbnail": "assets/thumbnails/vaxei2023.jpg",
+    "download": "assets/skins/vaxei2023.osk"
+  },
+  {
+    "id": 5,
+    "name": "Bacon Boi 1.0 (Blue)",
+    "author": "cyperdark",
+    "category": "NM",
+    "thumbnail": "assets/thumbnails/baconblue.jpg",
+    "download": "assets/skins/baconblue.osk"
+  },
+  {
+    "id": 6,
+    "name": "Whitecat 2.1 Old (Blue)",
+    "author": "cyperdark",
+    "category": "NM",
+    "thumbnail": "assets/thumbnails/whiteblueold.jpg",
+    "download": "assets/skins/whiteblueold.osk"
+  },
+  {
+    "id": 7,
+    "name": "MonkoEdit",
+    "author": "Monko2k",
+    "category": "NM",
+    "thumbnail": "assets/thumbnails/monkoedit.jpg",
+    "download": "assets/skins/monkoedit.osk"
+  },
+  {
+    "id": 8,
+    "name": "re;owoTuna v1.1 (Selyu)",
+    "author": "mekami/cyperdark",
+    "category": "NM",
+    "thumbnail": "assets/thumbnails/tuna.jpg",
+    "download": "assets/skins/tuna.osk"
+  }
+]
