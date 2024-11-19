@@ -40,6 +40,23 @@ header {
   color: white;
 }
 
+.request {
+  display: inline-block;
+  margin-top: 35px;
+  margin-left: 35px;
+  padding: 10px 20px;
+  background-color: #fafafa;
+  color: #09090b;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.request:hover {
+  background-color: #e2e2e2;
+}
+
 header input {
   margin-top: 10px;
   padding: 10px;

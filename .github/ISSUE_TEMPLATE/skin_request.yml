@@ -1,0 +1,24 @@
+name: Skin Request
+description: Use this template to request a new skin for the gallery.
+title: "[Skin Request] Add <Skin Name>"
+labels: skin-request
+body:
+  - type: input
+    id: skin-name
+    attributes:
+      label: Skin Name
+      description: Name of the osu! skin you want to add.
+      placeholder: Example: Blue Zenith
+      required: true
+  - type: input
+    id: skin-link
+    attributes:
+      label: Skin Download Link
+      description: Provide the download link for the skin.
+      placeholder: Example: https://example.com/skin.osk
+      required: true
+  - type: textarea
+    id: notes
+    attributes:
+      label: Additional Notes
+      description: Any additional information about the skin (optional).
