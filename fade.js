@@ -24,3 +24,12 @@ document.addEventListener("DOMContentLoaded", () => {
     }, FADE_DURATION);
   });
 });
+
+function navigateTo(event, url) {
+  if (event) {
+    event.preventDefault();
+    navigate(url);
+  } else {
+    window.location.href = url;
+  }
+}
