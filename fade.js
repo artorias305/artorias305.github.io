@@ -1,23 +1,26 @@
-// app.js or a new script.js
 document.addEventListener("DOMContentLoaded", () => {
   const links = document.querySelectorAll("a");
-  document.body.classList.remove("fade-out");
+  const FADE_DURATION = 500;
+
+  function navigate(url) {
+    document.body.classList.add("fade-out");
+    setTimeout(() => {
+      window.location.href = url;
+    }, FADE_DURATION);
+  }
 
   links.forEach((link) => {
     link.addEventListener("click", (event) => {
-      // Prevent default navigation
       event.preventDefault();
-
-      // Get the target URL
       const targetUrl = event.target.href;
-
-      // Add fade-out class
-      document.body.classList.add("fade-out");
-
-      // Wait for the fade-out transition to complete, then navigate
-      setTimeout(() => {
-        window.location.href = targetUrl;
-      }, 500); // Match the transition duration in CSS
+      navigate(targetUrl);
     });
+  });
+
+  window.addEventListener("popstate", () => {
+    document.body.classList.add("fade-out");
+    setTimeout(() => {
+      document.body.classList.remove("fade-out");
+    }, FADE_DURATION);
   });
 });
