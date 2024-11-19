@@ -17,6 +17,7 @@ fetch("skins.json")
         `;
       });
     }
+
     renderSkins(data);
 
     searchInput.addEventListener("input", () => {
@@ -28,6 +29,24 @@ fetch("skins.json")
           skin.category.toLowerCase().includes(query)
       );
       renderSkins(filteredSkins);
+    });
+
+    gallery.addEventListener("click", (e) => {
+      const button = e.target.closest(".btn");
+      if (button) {
+        const spinner = document.createElement("div");
+        spinner.className = "spinner";
+
+        button.classList.add("downloading");
+        button.textContent = "Downloading";
+        button.appendChild(spinner);
+
+        setTimeout(() => {
+          button.classList.remove("downloading");
+          button.textContent = "Download";
+          spinner.remove();
+        }, 2000);
+      }
     });
   })
   .catch((error) => console.error("Error loading skins:", error));

@@ -169,3 +169,28 @@ p {
   font-weight: bold;
   color: white;
 }
+
+.spinner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 16px;
+  height: 16px;
+  border: 2px solid transparent;
+  border-top-color: #09090b;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  transform: translate(-50%, -50%);
+}
+
+@keyframes spin {
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+.skin-card .btn.downloading {
+  background-color: #d4d4d4;
+  color: #505050;
+  pointer-events: none;
+}
