@@ -77,9 +77,24 @@ input:focus {
 
 #skin-gallery {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
   gap: 20px;
   padding: 20px;
+  max-width: 1800px; /* Add max-width to maintain 3 columns max */
+  margin: 0 auto; /* Center the gallery */
+}
+
+@media screen and (max-width: 768px) {
+  #skin-gallery {
+    grid-template-columns: 1fr;
+    padding: 10px;
+  }
+
+  .skin-card {
+    max-width: 500px; /* Match the desktop card width */
+    margin: 0 auto; /* Center the card */
+    padding: 15px;
+  }
 }
 
 .skin-card {
