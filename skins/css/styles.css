@@ -91,25 +91,35 @@ input:focus {
   border: 1px solid rgba(212, 212, 212, 0.1);
   position: relative;
   overflow: hidden;
-  height: 450px;
-  width: 550px;
+
+  height: auto;
+  width: auto;
+  max-width: 100%;
 }
 
-/* .skin-card:hover {
-  transform: translateY(-10px);
-} */
+.skin-card img {
+  width: 100%;
+  height: auto;
+  border-radius: 5px;
+  border: 1px solid rgba(212, 212, 212, 0.1);
+  box-shadow: 0 4px 8px rgb(0, 0, 0, 0.1);
+}
+
+@media screen and (max-width: 768px) {
+  #skin-gallery {
+    grid-template-columns: 1fr;
+    padding: 10px;
+  }
+
+  .skin-card {
+    padding: 15px;
+  }
+}
 
 .skin-card:hover::before {
   width: 300px;
   height: 300px;
   opacity: 1;
-}
-
-.skin-card img {
-  max-width: 90%;
-  border-radius: 5px;
-  border: 1px solid rgba(212, 212, 212, 0.1);
-  box-shadow: 0 4px 8px rgb(0, 0, 0, 0.1);
 }
 
 .skin-card h3 {
@@ -140,19 +150,18 @@ input:focus {
 }
 
 .skin-card .btn::after {
-  content: "➔"; /* Unicode arrow character */
+  content: "➔";
   position: absolute;
-  right: -30px; /* Start off the button, hidden */
+  right: -30px;
   top: 50%;
   transform: translateY(-50%);
   font-size: 1.2em;
   color: #09090b;
-  transition: right 0.3s ease; /* Sliding effect */
+  transition: right 0.3s ease;
 }
 
-/* Slide the arrow into view on hover */
 .skin-card .btn:hover::after {
-  right: 10px; /* Slide arrow inside the button */
+  right: 10px;
 }
 
 h2,
