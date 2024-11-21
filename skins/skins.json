@@ -86,5 +86,13 @@
     "category": "DT",
     "thumbnail": "assets/thumbnails/zylice-rafis.jpg",
     "download": "assets/skins/zylice-rafis.osk"
+  },
+  {
+    "id": 12,
+    "name": "FREEDOM DIVE",
+    "author": "BTMC",
+    "category": "NM",
+    "thumbnail": "assets/thumbnails/freedomdive.jpg",
+    "download": "assets/skins/freedomdive.osk"
   }
 ]

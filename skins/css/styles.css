@@ -42,8 +42,6 @@ header {
 
 .request {
   display: inline-block;
-  margin-top: 35px;
-  margin-left: 35px;
   padding: 10px 20px;
   background-color: #fafafa;
   color: #09090b;
@@ -51,6 +49,7 @@ header {
   text-decoration: none;
   font-weight: bold;
   transition: background-color 0.3s ease;
+  margin: 0;
 }
 
 .request:hover {
@@ -80,8 +79,8 @@ input:focus {
   grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
   gap: 20px;
   padding: 20px;
-  max-width: 1800px; /* Add max-width to maintain 3 columns max */
-  margin: 0 auto; /* Center the gallery */
+  max-width: 1800px;
+  margin: 0 auto;
 }
 
 @media screen and (max-width: 768px) {
@@ -91,8 +90,8 @@ input:focus {
   }
 
   .skin-card {
-    max-width: 500px; /* Match the desktop card width */
-    margin: 0 auto; /* Center the card */
+    max-width: 500px;
+    margin: 0 auto;
     padding: 15px;
   }
 }
@@ -217,4 +216,24 @@ p {
   background-color: #d4d4d4;
   color: #505050;
   pointer-events: none;
+}
+
+.header-controls {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.header-controls input {
+  margin-top: 0;
+  flex: 1;
+}
+
+.download-all-btn {
+  background-color: #2ecc71;
+}
+
+.download-all-btn:hover {
+  background-color: #27ae60;
 }

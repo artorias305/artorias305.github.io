@@ -3,6 +3,36 @@ fetch("skins.json")
   .then((data) => {
     const gallery = document.getElementById("skin-gallery");
     const searchInput = document.getElementById("search");
+    const downloadAllBtn = document.getElementById("downloadAllBtn");
+
+    downloadAllBtn.addEventListener("click", async (e) => {
+      e.preventDefault();
+
+      const originalText = downloadAllBtn.textContent;
+      downloadAllBtn.textContent = "Preparing Download...";
+      downloadAllBtn.style.pointerEvents = "none";
+
+      try {
+        const downloadUrls = data.map((skin) => skin.download);
+
+        for (const url of downloadUrls) {
+          const link = document.createElement("a");
+          link.href = url;
+          link.download = url.split("/").pop();
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+
+          await new Promise((resolve) => setTimeout(resolve, 500));
+        }
+      } catch (error) {
+        console.error("Error downloading skins:", error);
+        alert("There was an error downloading the skins. Please try again.");
+      } finally {
+        downloadAllBtn.textContent = originalText;
+        downloadAllBtn.style.pointerEvents = "auto";
+      }
+    });
 
     function renderSkins(skins) {
       gallery.innerHTML = "";
