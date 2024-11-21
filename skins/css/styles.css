@@ -237,3 +237,82 @@ p {
 .download-all-btn:hover {
   background-color: #27ae60;
 }
+
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.9);
+  z-index: 1000;
+  overflow: hidden;
+}
+
+.modal-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 90%;
+  max-height: 90vh;
+}
+
+.modal-img {
+  width: 100%;
+  height: auto;
+  cursor: move;
+  transform-origin: center center;
+  transition: transform 0.1s ease;
+}
+
+.close-modal {
+  position: absolute;
+  top: 15px;
+  right: 25px;
+  color: #f1f1f1;
+  font-size: 40px;
+  font-weight: bold;
+  cursor: pointer;
+  z-index: 1001;
+}
+
+.zoom-controls {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+  background: rgba(0, 0, 0, 0.5);
+  padding: 10px;
+  border-radius: 20px;
+  z-index: 1001;
+}
+
+.zoom-btn {
+  background: #fafafa;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  font-size: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease;
+}
+
+.zoom-btn:hover {
+  background: #e2e2e2;
+}
+
+.zoom-level {
+  color: white;
+  display: flex;
+  align-items: center;
+  min-width: 60px;
+  justify-content: center;
+}

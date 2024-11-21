@@ -34,12 +34,56 @@ fetch("skins.json")
       }
     });
 
+    function createImageModal() {
+      const modal = document.createElement("div");
+      modal.className = "modal";
+      modal.innerHTML = `
+        <span class="close-modal">&times;</span>
+        <div class="modal-content">
+          <img class="modal-img" src="" alt="Preview">
+        </div>
+        <div class="zoom-controls">
+          <button class="zoom-btn" id="zoom-out">-</button>
+          <div class="zoom-level">100%</div>
+          <button class="zoom-btn" id="zoom-in">+</button>
+        </div>
+      `;
+      document.body.appendChild(modal);
+      return modal;
+    }
+
+    const modal = createImageModal();
+    const modalImg = modal.querySelector(".modal-img");
+    const zoomLevel = modal.querySelector(".zoom-level");
+    const closeBtn = modal.querySelector(".close-modal");
+    const zoomInBtn = modal.querySelector("#zoom-in");
+    const zoomOutBtn = modal.querySelector("#zoom-out");
+
+    let scale = 1;
+    let isDragging = false;
+    let startX,
+      startY,
+      translateX = 0,
+      translateY = 0;
+
+    function updateTransform() {
+      modalImg.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scale})`;
+      zoomLevel.textContent = `${Math.round(scale * 100)}%`;
+    }
+
+    function resetZoom() {
+      scale = 1;
+      translateX = 0;
+      translateY = 0;
+      updateTransform();
+    }
+
     function renderSkins(skins) {
       gallery.innerHTML = "";
       skins.forEach((skin) => {
         gallery.innerHTML += `
           <div class="skin-card">
-            <img src="${skin.thumbnail}" alt="${skin.name}">
+            <img src="${skin.thumbnail}" alt="${skin.name}" class="preview-trigger">
             <h3>${skin.name}</h3>
             <p>By: ${skin.author}</p>
             <a href="${skin.download}" class="btn" download>Download</a>
@@ -76,6 +120,83 @@ fetch("skins.json")
           button.textContent = "Download";
           spinner.remove();
         }, 2000);
+      }
+    });
+
+    gallery.addEventListener("click", (e) => {
+      if (e.target.classList.contains("preview-trigger")) {
+        modal.style.display = "block";
+        modalImg.src = e.target.src;
+        resetZoom();
+      }
+    });
+
+    closeBtn.addEventListener("click", () => {
+      modal.style.display = "none";
+    });
+
+    zoomInBtn.addEventListener("click", () => {
+      scale = Math.min(scale + 0.25, 3);
+      updateTransform();
+    });
+
+    zoomOutBtn.addEventListener("click", () => {
+      scale = Math.max(scale - 0.25, 0.5);
+      updateTransform();
+    });
+
+    modalImg.addEventListener("wheel", (e) => {
+      e.preventDefault();
+      const delta = e.deltaY * -0.01;
+      scale = Math.max(0.5, Math.min(scale + delta, 3));
+      updateTransform();
+    });
+
+    modalImg.addEventListener("mousedown", (e) => {
+      isDragging = true;
+      startX = e.clientX - translateX;
+      startY = e.clientY - translateY;
+      modalImg.style.cursor = "grabbing";
+    });
+
+    window.addEventListener("mousemove", (e) => {
+      if (!isDragging) return;
+
+      translateX = e.clientX - startX;
+      translateY = e.clientY - startY;
+      updateTransform();
+    });
+
+    window.addEventListener("mouseup", () => {
+      isDragging = false;
+      modalImg.style.cursor = "move";
+    });
+
+    modal.addEventListener("click", (e) => {
+      if (e.target === modal) {
+        modal.style.display = "none";
+      }
+    });
+
+    window.addEventListener("keydown", (e) => {
+      if (modal.style.display === "block") {
+        switch (e.key) {
+          case "Escape":
+            modal.style.display = "none";
+            break;
+          case "+":
+          case "=":
+            scale = Math.min(scale + 0.25, 3);
+            updateTransform();
+            break;
+          case "-":
+            scale = Math.max(scale - 0.25, 0.5);
+            updateTransform();
+            break;
+          case "0":
+            resetZoom();
+            break;
+        }
       }
     });
   })
