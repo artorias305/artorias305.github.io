@@ -5,6 +5,37 @@ fetch("skins.json")
     const searchInput = document.getElementById("search");
     const downloadAllBtn = document.getElementById("downloadAllBtn");
 
+    const themeSwitch = document.getElementById("checkbox");
+    const currentTheme = localStorage.getItem("theme");
+
+    if (currentTheme) {
+      document.documentElement.setAttribute("data-theme", currentTheme);
+      if (currentTheme === "light") {
+        themeSwitch.checked = true;
+      }
+    }
+
+    themeSwitch.addEventListener("change", function (e) {
+      if (e.target.checked) {
+        document.documentElement.setAttribute("data-theme", "light");
+        localStorage.setItem("theme", "light");
+      } else {
+        document.documentElement.setAttribute("data-theme", "dark");
+        localStorage.setItem("theme", "dark");
+      }
+    });
+
+    if (!currentTheme) {
+      const prefersDark = window.matchMedia(
+        "(prefers-color-scheme: dark)"
+      ).matches;
+      document.documentElement.setAttribute(
+        "data-theme",
+        prefersDark ? "dark" : "light"
+      );
+      themeSwitch.checked = !prefersDark;
+    }
+
     downloadAllBtn.addEventListener("click", async (e) => {
       e.preventDefault();
 
