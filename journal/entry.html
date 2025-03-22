@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Journal Entry | My University Journal</title>
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fafafa;
+        }
+        
+        .entry {
+            margin-bottom: 50px;
+        }
+        
+        .date {
+            font-size: 0.9rem;
+            color: #999;
+            margin-bottom: 10px;
+        }
+        
+        .entry-title {
+            font-size: 2rem;
+            font-weight: 400;
+            margin-bottom: 20px;
+        }
+        
+        .content {
+            font-weight: 300;
+        }
+        
+        .content img {
+            max-width: 100%;
+            height: auto;
+        }
+        
+        .content code {
+            background-color: #f5f5f5;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-family: monospace;
+        }
+        
+        .content pre code {
+            display: block;
+            padding: 10px;
+            overflow-x: auto;
+            background-color: #f5f5f5;
+            border-radius: 4px;
+        }
+        
+        .tags {
+            margin-top: 15px;
+        }
+        
+        .tag {
+            display: inline-block;
+            background-color: #f0f0f0;
+            padding: 4px 8px;
+            border-radius: 3px;
+            font-size: 0.8rem;
+            color: #666;
+            margin-right: 5px;
+            margin-bottom: 5px;
+        }
+        
+        .nav-links {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+        }
+        
+        .nav-link {
+            color: #666;
+            text-decoration: none;
+            opacity: 0.8;
+            transition: opacity 0.2s ease;
+        }
+        
+        .nav-link:hover {
+            opacity: 1;
+            color: #0066cc;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #999;
+        }
+        
+        .error {
+            text-align: center;
+            padding: 40px;
+            color: #e74c3c;
+        }
+    </style>
+</head>
+<body>
+    <div id="entry-container">
+        <div class="loading">Loading entry...</div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/5.0.4/marked.min.js"></script>
+    <script>
+        // Configuration
+        const postsDirectory = 'posts/';
+        const indexFile = 'index.json';
+        
+        // Get entry ID from URL
+        function getEntryId() {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get('id');
+        }
+        
+        // Load and display a single entry
+        async function loadEntry() {
+            const entryId = getEntryId();
+            const entryContainer = document.getElementById('entry-container');
+            
+            if (!entryId) {
+                entryContainer.innerHTML = `
+                    <div class="error">No entry ID specified.</div>
+                    <div class="nav-links">
+                        <a href="./index.html" class="nav-link">← Back to Journal</a>
+                    </div>
+                `;
+                return;
+            }
+            
+            try {
+                // Load the index file to get metadata
+                const indexResponse = await fetch(`${postsDirectory}${indexFile}`);
+                if (!indexResponse.ok) {
+                    throw new Error('Could not load journal index');
+                }
+                
+                const entriesIndex = await indexResponse.json();
+                
+                // Find the entry matching our ID
+                const entryFilename = `${entryId}.md`;
+                const entryMeta = entriesIndex.find(entry => entry.filename === entryFilename);
+                
+                if (!entryMeta) {
+                    throw new Error('Entry not found');
+                }
+                
+                // Update the page title
+                document.title = `${entryMeta.title} | My University Journal`;
+                
+                // Load the markdown content file
+                const contentResponse = await fetch(`${postsDirectory}${entryMeta.filename}`);
+                if (!contentResponse.ok) {
+                    throw new Error(`Failed to load entry: ${entryMeta.filename}`);
+                }
+                
+                const markdownContent = await contentResponse.text();
+                
+                // Create entry DOM elements
+                const entryElement = document.createElement('article');
+                entryElement.className = 'entry';
+                
+                const dateElement = document.createElement('div');
+                dateElement.className = 'date';
+                dateElement.textContent = entryMeta.date;
+                
+                const titleElement = document.createElement('h1');
+                titleElement.className = 'entry-title';
+                titleElement.textContent = entryMeta.title;
+                
+                const contentElement = document.createElement('div');
+                contentElement.className = 'content';
+                contentElement.innerHTML = marked.parse(markdownContent);
+                
+                const tagsElement = document.createElement('div');
+                tagsElement.className = 'tags';
+                
+                if (entryMeta.tags && entryMeta.tags.length > 0) {
+                    entryMeta.tags.forEach(tag => {
+                        const tagElement = document.createElement('span');
+                        tagElement.className = 'tag';
+                        tagElement.textContent = tag;
+                        tagsElement.appendChild(tagElement);
+                    });
+                }
+                
+                // Navigation links
+                const navLinksElement = document.createElement('div');
+                navLinksElement.className = 'nav-links';
+                
+                const backLink = document.createElement('a');
+                backLink.href = './index.html';
+                backLink.className = 'nav-link';
+                backLink.textContent = '← Back to Journal';
+                
+                const homeLink = document.createElement('a');
+                homeLink.href = '../';
+                homeLink.className = 'nav-link';
+                homeLink.textContent = 'Home';
+                
+                navLinksElement.appendChild(backLink);
+                navLinksElement.appendChild(homeLink);
+                
+                // Assemble the entry
+                entryElement.appendChild(dateElement);
+                entryElement.appendChild(titleElement);
+                entryElement.appendChild(contentElement);
+                entryElement.appendChild(tagsElement);
+                
+                // Clear the container and add our elements
+                entryContainer.innerHTML = '';
+                entryContainer.appendChild(entryElement);
+                entryContainer.appendChild(navLinksElement);
+                
+            } catch (error) {
+                console.error('Error loading entry:', error);
+                entryContainer.innerHTML = `
+                    <div class="error">Error: ${error.message}</div>
+                    <div class="nav-links">
+                        <a href="./index.html" class="nav-link">← Back to Journal</a>
+                    </div>
+                `;
+            }
+        }
+        
+        // Initialize
+        document.addEventListener('DOMContentLoaded', loadEntry);
+    </script>
+</body>
+</html>

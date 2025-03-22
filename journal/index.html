@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My University Journal</title>
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fafafa;
+        }
+        
+        header {
+            margin-bottom: 40px;
+        }
+        
+        h1 {
+            font-weight: 300;
+            font-size: 2.4rem;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            color: #666;
+            font-weight: 300;
+            margin-top: 0;
+        }
+        
+        .entry-list {
+            margin-top: 30px;
+        }
+        
+        .entry-item {
+            margin-bottom: 25px;
+            padding-bottom: 25px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .entry-item:last-child {
+            border-bottom: none;
+        }
+        
+        .entry-date {
+            font-size: 0.9rem;
+            color: #999;
+            margin-bottom: 5px;
+        }
+        
+        .entry-title {
+            font-size: 1.4rem;
+            font-weight: 400;
+            margin: 0 0 10px 0;
+        }
+        
+        .entry-title a {
+            text-decoration: none;
+            color: #333;
+            transition: color 0.2s;
+        }
+        
+        .entry-title a:hover {
+            color: #0066cc;
+        }
+        
+        .entry-preview {
+            color: #666;
+            margin-bottom: 10px;
+        }
+        
+        .tags {
+            margin-top: 10px;
+        }
+        
+        .tag {
+            display: inline-block;
+            background-color: #f0f0f0;
+            padding: 4px 8px;
+            border-radius: 3px;
+            font-size: 0.8rem;
+            color: #666;
+            margin-right: 5px;
+            margin-bottom: 5px;
+        }
+        
+        .read-more {
+            display: inline-block;
+            margin-top: 10px;
+            color: #0066cc;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+        
+        .read-more:hover {
+            text-decoration: underline;
+        }
+        
+        a.home-link {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            color: #666;
+            text-decoration: none;
+            opacity: 0.7;
+            transition: opacity 0.2s ease;
+        }
+        
+        a.home-link:hover {
+            opacity: 1;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #999;
+        }
+    </style>
+</head>
+<body>
+    <a href="../" class="home-link">← Home</a>
+    
+    <header>
+        <h1>University Journal</h1>
+        <p class="subtitle">Documenting my learning journey, day by day</p>
+    </header>
+    
+    <main id="journal-entries">
+        <div class="loading">Loading entries...</div>
+    </main>
+
+    <script>
+        // Configuration
+        const postsDirectory = 'posts/';
+        const indexFile = 'index.json';
+        
+        // Fetch and display entry summaries
+        async function loadJournalIndex() {
+            try {
+                // Load the index file which contains metadata for all posts
+                const response = await fetch(`${postsDirectory}${indexFile}`);
+                if (!response.ok) {
+                    throw new Error('Could not load journal index');
+                }
+                
+                const entriesIndex = await response.json();
+                const entriesContainer = document.getElementById('journal-entries');
+                entriesContainer.innerHTML = '';
+                
+                // Create the entries list container
+                const entriesList = document.createElement('div');
+                entriesList.className = 'entry-list';
+                
+                // Sort entries by date (newest first)
+                entriesIndex.sort((a, b) => new Date(b.date) - new Date(a.date));
+                
+                // Process each entry
+                for (const entryMeta of entriesIndex) {
+                    // Create entry item elements
+                    const entryItem = document.createElement('div');
+                    entryItem.className = 'entry-item';
+                    
+                    const dateElement = document.createElement('div');
+                    dateElement.className = 'entry-date';
+                    dateElement.textContent = entryMeta.date;
+                    
+                    const titleElement = document.createElement('h2');
+                    titleElement.className = 'entry-title';
+                    
+                    const titleLink = document.createElement('a');
+                    // Generate slug from filename, removing extension
+                    const slug = entryMeta.filename.replace('.md', '');
+                    titleLink.href = `./entry.html?id=${slug}`;
+                    titleLink.textContent = entryMeta.title;
+                    
+                    titleElement.appendChild(titleLink);
+                    
+                    // Add preview if available
+                    if (entryMeta.preview) {
+                        const previewElement = document.createElement('div');
+                        previewElement.className = 'entry-preview';
+                        previewElement.textContent = entryMeta.preview;
+                        entryItem.appendChild(previewElement);
+                    }
+                    
+                    // Add tags
+                    const tagsElement = document.createElement('div');
+                    tagsElement.className = 'tags';
+                    
+                    if (entryMeta.tags && entryMeta.tags.length > 0) {
+                        entryMeta.tags.forEach(tag => {
+                            const tagElement = document.createElement('span');
+                            tagElement.className = 'tag';
+                            tagElement.textContent = tag;
+                            tagsElement.appendChild(tagElement);
+                        });
+                    }
+                    
+                    // Read more link
+                    const readMoreLink = document.createElement('a');
+                    readMoreLink.className = 'read-more';
+                    readMoreLink.href = `./entry.html?id=${slug}`;
+                    readMoreLink.textContent = 'Read more →';
+                    
+                    // Assemble the entry item
+                    entryItem.appendChild(dateElement);
+                    entryItem.appendChild(titleElement);
+                    
+                    // Add preview if available
+                    if (entryMeta.preview) {
+                        const previewElement = document.createElement('div');
+                        previewElement.className = 'entry-preview';
+                        previewElement.textContent = entryMeta.preview;
+                        entryItem.appendChild(previewElement);
+                    }
+                    
+                    entryItem.appendChild(tagsElement);
+                    entryItem.appendChild(readMoreLink);
+                    
+                    entriesList.appendChild(entryItem);
+                }
+                
+                entriesContainer.appendChild(entriesList);
+                
+                // Show message if no entries
+                if (entriesIndex.length === 0) {
+                    entriesContainer.innerHTML = '<div class="loading">No journal entries yet.</div>';
+                }
+                
+            } catch (error) {
+                console.error('Error loading journal:', error);
+                document.getElementById('journal-entries').innerHTML = 
+                    `<div class="loading">Error loading journal entries. Check console for details.</div>`;
+            }
+        }
+        
+        // Initialize the journal index
+        document.addEventListener('DOMContentLoaded', loadJournalIndex);
+    </script>
+</body>
+</html>
