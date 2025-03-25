@@ -110,17 +110,14 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/5.0.4/marked.min.js"></script>
     <script>
-        // Configuration
         const postsDirectory = 'posts/';
         const indexFile = 'index.json';
         
-        // Get entry ID from URL
         function getEntryId() {
             const urlParams = new URLSearchParams(window.location.search);
             return urlParams.get('id');
         }
         
-        // Load and display a single entry
         async function loadEntry() {
             const entryId = getEntryId();
             const entryContainer = document.getElementById('entry-container');
@@ -136,7 +133,6 @@
             }
             
             try {
-                // Load the index file to get metadata
                 const indexResponse = await fetch(`${postsDirectory}${indexFile}`);
                 if (!indexResponse.ok) {
                     throw new Error('Could not load journal index');
@@ -144,7 +140,6 @@
                 
                 const entriesIndex = await indexResponse.json();
                 
-                // Find the entry matching our ID
                 const entryFilename = `${entryId}.md`;
                 const entryMeta = entriesIndex.find(entry => entry.filename === entryFilename);
                 
@@ -152,10 +147,8 @@
                     throw new Error('Entry not found');
                 }
                 
-                // Update the page title
                 document.title = `${entryMeta.title} | My University Journal`;
                 
-                // Load the markdown content file
                 const contentResponse = await fetch(`${postsDirectory}${entryMeta.filename}`);
                 if (!contentResponse.ok) {
                     throw new Error(`Failed to load entry: ${entryMeta.filename}`);
@@ -163,7 +156,6 @@
                 
                 const markdownContent = await contentResponse.text();
                 
-                // Create entry DOM elements
                 const entryElement = document.createElement('article');
                 entryElement.className = 'entry';
                 
@@ -190,8 +182,7 @@
                         tagsElement.appendChild(tagElement);
                     });
                 }
-                
-                // Navigation links
+            
                 const navLinksElement = document.createElement('div');
                 navLinksElement.className = 'nav-links';
                 
@@ -208,13 +199,11 @@
                 navLinksElement.appendChild(backLink);
                 navLinksElement.appendChild(homeLink);
                 
-                // Assemble the entry
                 entryElement.appendChild(dateElement);
                 entryElement.appendChild(titleElement);
                 entryElement.appendChild(contentElement);
                 entryElement.appendChild(tagsElement);
                 
-                // Clear the container and add our elements
                 entryContainer.innerHTML = '';
                 entryContainer.appendChild(entryElement);
                 entryContainer.appendChild(navLinksElement);
@@ -230,7 +219,6 @@
             }
         }
         
-        // Initialize
         document.addEventListener('DOMContentLoaded', loadEntry);
     </script>
 </body>
