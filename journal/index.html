@@ -5,14 +5,53 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My University Journal</title>
     <style>
+        :root {
+            --bg-color: #fafafa;
+            --text-color: #333;
+            --secondary-text: #666;
+            --light-bg: #f5f5f5;
+            --border-color: #eee;
+            --tag-bg: #f0f0f0;
+            --tag-text: #666;
+            --link-hover: #0066cc;
+            --date-color: #999;
+        }
+
+        html[data-theme='dark'] {
+            --bg-color: #1a1a1a;
+            --text-color: #e0e0e0;
+            --secondary-text: #b0b0b0;
+            --light-bg: #2d2d2d;
+            --border-color: #333;
+            --tag-bg: #333;
+            --tag-text: #b0b0b0;
+            --link-hover: #66b0ff;
+            --date-color: #808080;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            html:not([data-theme='light']) {
+                --bg-color: #1a1a1a;
+                --text-color: #e0e0e0;
+                --secondary-text: #b0b0b0;
+                --light-bg: #2d2d2d;
+                --border-color: #333;
+                --tag-bg: #333;
+                --tag-text: #b0b0b0;
+                --link-hover: #66b0ff;
+                --date-color: #808080;
+            }
+        }
+
         body {
             font-family: 'Helvetica Neue', Arial, sans-serif;
             line-height: 1.6;
-            color: #333;
+            color: var(--text-color);
             max-width: 700px;
             margin: 0 auto;
             padding: 20px;
-            background-color: #fafafa;
+            background-color: var(--bg-color);
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
         
         header {
@@ -23,10 +62,11 @@
             font-weight: 300;
             font-size: 2.4rem;
             margin-bottom: 10px;
+            color: var(--text-color);
         }
         
         .subtitle {
-            color: #666;
+            color: var(--secondary-text);
             font-weight: 300;
             margin-top: 0;
         }
@@ -38,7 +78,7 @@
         .entry-item {
             margin-bottom: 25px;
             padding-bottom: 25px;
-            border-bottom: 1px solid #eee;
+            border-bottom: 1px solid var(--border-color);
         }
         
         .entry-item:last-child {
@@ -47,7 +87,7 @@
         
         .entry-date {
             font-size: 0.9rem;
-            color: #999;
+            color: var(--date-color);
             margin-bottom: 5px;
         }
         
@@ -59,16 +99,16 @@
         
         .entry-title a {
             text-decoration: none;
-            color: #333;
+            color: var(--text-color);
             transition: color 0.2s;
         }
         
         .entry-title a:hover {
-            color: #0066cc;
+            color: var(--link-hover);
         }
         
         .entry-preview {
-            color: #666;
+            color: var(--secondary-text);
             margin-bottom: 10px;
         }
         
@@ -78,11 +118,11 @@
         
         .tag {
             display: inline-block;
-            background-color: #f0f0f0;
+            background-color: var(--tag-bg);
             padding: 4px 8px;
             border-radius: 3px;
             font-size: 0.8rem;
-            color: #666;
+            color: var(--tag-text);
             margin-right: 5px;
             margin-bottom: 5px;
         }
@@ -90,7 +130,7 @@
         .read-more {
             display: inline-block;
             margin-top: 10px;
-            color: #0066cc;
+            color: var(--link-hover);
             text-decoration: none;
             font-size: 0.9rem;
         }
@@ -101,9 +141,9 @@
         
         a.home-link {
             position: fixed;
-            top: 10px;
-            left: 10px;
-            color: #666;
+            top: 20px;
+            left: 20px;
+            color: var(--secondary-text);
             text-decoration: none;
             opacity: 0.7;
             transition: opacity 0.2s ease;
@@ -116,12 +156,30 @@
         .loading {
             text-align: center;
             padding: 40px;
-            color: #999;
+            color: var(--date-color);
+        }
+
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--tag-bg);
+            border: none;
+            padding: 8px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            color: var(--text-color);
+            transition: background-color 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            background: var(--border-color);
         }
     </style>
 </head>
 <body>
     <a href="../" class="home-link">← Home</a>
+    <button class="theme-toggle" onclick="toggleTheme()">🌓 Theme</button>
     
     <header>
         <h1>University Journal</h1>
@@ -133,6 +191,32 @@
     </main>
 
     <script>
+        function toggleTheme() {
+            const html = document.documentElement;
+            const currentTheme = html.getAttribute('data-theme') || 'light';
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            html.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+        }
+
+        function setInitialTheme() {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme) {
+                document.documentElement.setAttribute('data-theme', savedTheme);
+            } else {
+                const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                document.documentElement.setAttribute('data-theme', prefersDark ? 'dark' : 'light');
+            }
+        }
+
+        setInitialTheme();
+
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+            if (!localStorage.getItem('theme')) {
+                document.documentElement.setAttribute('data-theme', e.matches ? 'dark' : 'light');
+            }
+        });
+
         const postsDirectory = 'posts/';
         const indexFile = 'index.json';
         
@@ -164,7 +248,6 @@
                     titleElement.className = 'entry-title';
                     
                     const titleLink = document.createElement('a');
-                 
                     const slug = entryMeta.filename.replace('.md', '');
                     titleLink.href = `./entry.html?id=${slug}`;
                     titleLink.textContent = entryMeta.title;
