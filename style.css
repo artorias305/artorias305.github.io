@@ -93,29 +93,3 @@ a:hover {
   font-weight: bold;
   z-index: 9999;
 }
-
-.highlight-link {
-  position: relative;
-  opacity: 0.7;
-  transition: opacity 0.3s ease, color 0.3s ease;
-}
-
-.highlight-link:hover {
-  opacity: 1;
-  color: rgba(120, 190, 255, 1);
-}
-
-.highlight-link::after {
-  content: '';
-  position: absolute;
-  width: 0;
-  height: 1px;
-  bottom: -2px;
-  left: 0;
-  background-color: rgba(120, 190, 255, 1);
-  transition: width 0.3s ease;
-}
-
-.highlight-link:hover::after {
-  width: 100%;
-}
